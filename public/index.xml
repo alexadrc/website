@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Alexa D. Reyna-Carrillo</title>
+    <link>/</link>
+    <description>Recent content on Alexa D. Reyna-Carrillo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 02 Oct 2016 22:55:05 -0400</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Projects</title>
+      <link>/projects/</link>
+      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
+      
+      <guid>/projects/</guid>
+      <description>Projects Here are some projects I have been working on:
+Project1.Rmd
+Project2.Rmd</description>
+    </item>
+    
+    <item>
+      <title>Project 1</title>
+      <link>/project1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project1/</guid>
+      <description>Alexa D. Reyna-Carrillo adr2872 library(&amp;quot;fivethirtyeight&amp;quot;) library(&amp;quot;ggplot2&amp;quot;) ## Error in library(&amp;quot;ggplot2&amp;quot;): there is no package called &amp;#39;ggplot2&amp;#39; data(state_info) data(bad_drivers) 0 - Introduction: For the exploratory data analysis project, I have chosen two datasets called “state_info” and “bad_drivers”. Both of these can be found in the “fivethirtyeight” package. The “state_info” dataset is a general overview of the 50 states and the District of Columbia that make up the United States. The dataset consists of the state name, abbreviation, division, and region, designated by the U.</description>
+    </item>
+    
+    <item>
+      <title>Project 2</title>
+      <link>/project2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project2/</guid>
+      <description>Alexa D. Reyna-Carrillo adr2872 library(&amp;quot;survival&amp;quot;) library(&amp;quot;ggplot2&amp;quot;) ## Error in library(&amp;quot;ggplot2&amp;quot;): there is no package called &amp;#39;ggplot2&amp;#39; library(&amp;quot;tidyverse&amp;quot;) ## Error in library(&amp;quot;tidyverse&amp;quot;): there is no package called &amp;#39;tidyverse&amp;#39; data(&amp;quot;veteran&amp;quot;) 0 - Introduction: The dataset I will be using is the veteran dataset found on the ‘survival’ package. This data focuses on a veterans’ administration lung cancer study. There was a randomized trial of two treatment regimens for lung cancer performed in veterans, and the standard survival analysis was collected to create the dataset.</description>
+    </item>
+    
+    <item>
+      <title>Resume</title>
+      <link>/resume2019/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resume2019/</guid>
+      <description>alexa.reynacr7@gmail.com
+EDUCATION
+The University of Texas at Austin, Austin, TX Fall 2019
+Bachelor of Science and Arts in Biology / Bachelor of Arts in Spanish 4th year / Senior
+EXPERIENCE
+Robin Healthcare, Austin, TX July 2019 - Present
+Virtual Medical Scribe
+ Assist doctors virtually by writing medical notes so they spend more time with the patient rather than typing on a computer
+ Gain familiarity of a doctor-patient encounter and apply professionalism skills</description>
+    </item>
+    
+  </channel>
+</rss>

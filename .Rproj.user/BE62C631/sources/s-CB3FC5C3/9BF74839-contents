@@ -1,0 +1,116 @@
+---
+title: "HW 4"
+author: "SDS348 Fall 2019"
+date: ""
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r global_options, include=FALSE}
+# DO NOT DELETE THIS CHUNK!
+library(knitr)
+opts_chunk$set(fig.align="center", fig.height=5, message=FALSE, fig.width=8,tidy.opts=list(width.cutoff=60),tidy=TRUE)
+```
+
+## Enter your name and EID here
+
+**This homework is due on Sep 29, 2019 at 11:59pm. Please submit as a pdf file on Canvas.**
+
+*For all questions, include the R commands/functions that you used to find your answer. Answers without supporting code will not receive credit.*
+
+> ### How to submit this assignment
+>All homework assignments will be completed using R Markdown. These `.Rmd` files consist of >text/syntax (formatted using Markdown) alongside embedded R code. 
+>When you have completed the assignment (by adding R code inside codeblocks and supporting text outside of the codeblocks), create your document as follows:
+
+> - Click the "Knit" button (above) to create an .html file
+> - Open the html file in your internet browser to view
+> - Go to `File > Print` and print your .html file to a .pdf
+> - (or knit to PDF)
+> - Upload the .pdf file to Canvas
+
+---
+
+### Question 1:
+
+##### Load the package nycflights13 with library(nycflights13). If you are on running R Studio locally, you must install this package before you can use it! 
+
+##### Run the included code chunk below to save flights and airports to your environment.
+
+```{R}
+# install.packages("nycflights13")
+library(nycflights13)
+library(ggplot2)
+library(dplyr)
+
+data(flights)
+data(airports)
+data(airlines)
+```
+
+##### Explore the `flights` dataset (e.g., run `glimpse(flights)` read the description of each variable in the help by running `?flights`). How many observations are there (that's how many flights left the three big NYC airports in 2013)!
+
+##### (a) (2 pts) Report the number and proportion of NAs for each variable using summarize_all() and/or mutate_all(). Ideally, you will write your own short function to count NAs by summing a logical and apply it to every column via `summarize_all`, but there are ways that don't involve creating a new function
+
+```{R}
+#your code here
+```
+
+
+##### (b) (2 pts) Remove all rows containing NAs from the dataset (**for the rest of the assignment, we will be using only the complete rows, so overwrite the `flights` dataset or save it as a new object and use it in place of `flights` for the rest of the assignment**). Now, using filter, what airport `dest`ination (three-letter code fine) has the longest `air_time`? 
+
+```{R}
+#your code here
+```
+
+
+##### (c) (4 pts) Find the mean, standard deviation, count, and standard error of `distance` in each month of each year (average across `day`) for flights from the three different New York airports (`origin`). You will use your sd and count to fine your se ($sd/\sqrt{count}$). Rename your summary variables inside of `summarize()`. 
+
+```{R}
+#your code here
+```
+
+##### (d) (4 pts) Using your results from part (c), make a barplot of mean distance for each month using `ggplot()`. Add manual standard error bars using geom_errorbar() by specifying `aes(x=month, y=your_mean, ymin=your_mean-your_se, ymax=your_mean+your_se)`. Facet (or equivalent) by `origin` and provide labels/ticks on the x-axis for each month. Write a bit about what you see!
+
+```{R}
+#your code here
+```
+
+
+*Your answer here; 1-2 sentences*
+
+### Question 2 (2 pts)
+
+Let's do some joining! The dataset `airlines` contains the full name of the carrier (examine it!). Join the dataset with the flights dataset so all of the information in `flights` is retained. Using the merged dataset, which carrier (`name`) has the longest average departure delay? Which has the shortest?
+
+```{R}
+#your code here
+```
+
+
+*Your answer here; 1-2 sentences*
+
+
+### Question 3 
+
+
+#### (a) (4 pts) Look at the dataset called `airports`. How many rows does it have? Using `%in%` with `sum()` or `mean()` (or using a join), how many of these airports (variable `faa`) appear in the `flights` dataset as destinations (after removing NA rows from the flights dataset, above)? How many unique destination airports are there in the flights dataset? Which destination airports are in the `flights` dataset but missing from the `airports` dataset? Google those airport codes: what do they have in common?
+
+```{R}
+#your code here
+```
+
+*Your answer here*
+
+#### (b) (2 pts) Do a join that results in a dataset that contains only the rows with matches (i.e., none of the airports not appearing in `flights`, none of the destinations not appearing in `airports`). Call `glimpse()` on this final dataset (please don't print the whole thing out).
+
+```{R}
+#your code here
+```
+
+```{R, echo=F}
+## DO NOT DELETE THIS BLOCK!
+sessionInfo()
+Sys.time()
+Sys.info()
+```

@@ -1,0 +1,26 @@
+install.packages("blogdown")
+blogdown::install_hugo()
+blogdown::new_site(theme="nurlansu/hugo-sustain", theme_example = T)
+
+
+
+blogdown::serve_site()
+
+
+
+
+
+
+
+
+
+install.packages(
+  "ggplot2",
+  repos = c("http://rstudio.org/_packages",
+            "http://cran.rstudio.com")
+)
+
+install.packages("ggplot2", dep=T)
+
+install.packages('ggplot2', repos='http://cran.us.r-project.org')
+

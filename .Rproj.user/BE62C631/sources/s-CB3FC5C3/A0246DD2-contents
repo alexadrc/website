@@ -1,0 +1,43 @@
+baseurl = "/"
+languageCode = "en-US"
+title = "Alexa D. Reyna-Carrillo"
+# Enable comments by entering your Disqus shortname
+disqusShortname = ""
+# Enable Google Analytics by entering your tracking code
+googleAnalytics = ""
+theme = "hugo-sustain"
+
+[permalinks]
+  post = "/:year/:month/:day/:slug"
+
+[params]
+  avatar = "avatar.png"
+  author = "Alexa D. Reyna-Carrillo"
+  description = "My name is alexa"
+
+  # Custom assets can be linked with their paths relative to static/
+  custom_css = []
+  custom_js  = []
+
+[params.social]
+  Github        = "alexadrc"
+  Email         = "alexa.reynacr7@gmail.com"
+  Twitter       = "alexadivany"
+  Instagram      = "alexadrc"
+
+## Main Menu
+[[menu.main]]
+  name = "blog"
+  weight = 100
+  identifier = "blog"
+  url = "/blog/"
+[[menu.main]]
+  name = "projects"
+  identifier = "projects"
+  weight = 200
+  url = "/projects/"
+[[menu.main]]
+  name = "resume"
+  identifier = "resume"
+  weight = 300
+  url = "/resume2019.pdf"

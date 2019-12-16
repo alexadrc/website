@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Alexa D. Reyna-Carrillo" />
+    <meta name="description" content="My name is alexa">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+    <title>Project 2</title>
+    <meta name="generator" content="Hugo 0.61.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/projects/">PROJECTS</a></li>
+        
+        <li><a href="/resume2019.pdf">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="/project2/">Project 2</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          January 1, 0001
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+
+<div id="alexa-d.-reyna-carrillo-adr2872" class="section level2">
+<h2>Alexa D. Reyna-Carrillo adr2872</h2>
+<pre class="r"><code>library(&quot;survival&quot;)
+library(&quot;ggplot2&quot;)</code></pre>
+<pre><code>## Error in library(&quot;ggplot2&quot;): there is no package called &#39;ggplot2&#39;</code></pre>
+<pre class="r"><code>library(&quot;tidyverse&quot;)</code></pre>
+<pre><code>## Error in library(&quot;tidyverse&quot;): there is no package called &#39;tidyverse&#39;</code></pre>
+<pre class="r"><code>data(&quot;veteran&quot;)</code></pre>
+<div id="introduction" class="section level3">
+<h3>0 - Introduction:</h3>
+<p><em>The dataset I will be using is the veteran dataset found on the ‘survival’ package. This data focuses on a veterans’ administration lung cancer study. There was a randomized trial of two treatment regimens for lung cancer performed in veterans, and the standard survival analysis was collected to create the dataset. The dataset contains 137 observations and 8 columns/variables. The variables for this dataset are treatment, celltype, time, status, Karnofsky score, diagnosis time, age, and prior therapy. Treatment is a binary variable consisting on what type of treatment the veterans received, whether standard or test. The celltype is a categorical variable that determined which carcinoma cell the treatment targeted. The time variable is a numeric variable that calculated the cells’ survival time. Status is a binary variable that described whether it was censored or not. Karno is a numeric variable that collected the veterans’ Karnofsky performance score from 0 to 100. Diagtime is another numeric variable that shows the months from diagnosis to randomization. Age is a numeric variable calculated in years to know the veterans’ age. Lastly, prior is a binary variable that determined whether the veterans had prior therapy or not. </em></p>
+</div>
+<div id="manova" class="section level3">
+<h3>1 - MANOVA:</h3>
+<pre class="r"><code>man1 &lt;- manova(cbind(time, age)~celltype, data=veteran)
+summary(man1)</code></pre>
+<pre><code>##            Df  Pillai approx F num Df den Df   Pr(&gt;F)   
+## celltype    3 0.15642   3.7614      6    266 0.001303 **
+## Residuals 133                                           
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>summary.aov(man1)</code></pre>
+<pre><code>##  Response time :
+##              Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## celltype      3  478636  159545  7.2955 0.0001446 ***
+## Residuals   133 2908596   21869                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##  Response age :
+##              Df Sum Sq Mean Sq F value Pr(&gt;F)
+## celltype      3    258  86.001    0.77 0.5128
+## Residuals   133  14855 111.693</code></pre>
+<pre class="r"><code>pairwise.t.test(veteran$time, veteran$celltype, p.adj=&quot;none&quot;)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  veteran$time and veteran$celltype 
+## 
+##           squamous smallcell adeno  
+## smallcell 0.00015  -         -      
+## adeno     0.00046  0.83213   -      
+## large     0.36977  0.00890   0.01243
+## 
+## P value adjustment method: none</code></pre>
+<pre class="r"><code>1-(0.95^7)</code></pre>
+<pre><code>## [1] 0.3016627</code></pre>
+<pre class="r"><code>0.05/7</code></pre>
+<pre><code>## [1] 0.007142857</code></pre>
+<p><em>There were 7 tests performed. The MANOVA test was performed to determine the effect of the celltype categorical variable containing 4 levels (squamous, smallcell, adeno, and large) on two numeric variables (age and time). The probability of at least one Type I error was 0.30 and using the Bonferroni method, the adjusted significance level was 0.007. Because the MANOVA demonstrated that at least one of the numeric variables showed a signicant mean difference on the 4 cell type levels, 2 ANOVAs were then performed to determine which of the two had a significant mean difference. The univariate ANOVA of time showed a significant mean difference across the 4 levels while the ANOVA of age did not. Post hoc analysis was performed conducting 4 pairwise comparisons to determine which cell type differed in time. Therefore, only the squamous cell type was found to differ significantly in terms of time after adjusting for multiple comparisons (Bonferroni). The MANOVA assumptions of random sampling/independent observations, multivariate normality of dependent variables (DVs), homogeneity of within-group covariance matrices, and no multicollinearity are likely to be met. The assumption of linear relationships among DVs, however, is likely to not be met due to the missing linear relationship between age and time variables. The assumption of no extreme univariate or multivariate outliers is also likely to not be met due to the drastic differences in responses on the time variable ranging from 1 to 999.</em></p>
+</div>
+<div id="randomization-test" class="section level3">
+<h3>2 - Randomization test:</h3>
+<pre class="r"><code>library(vegan)</code></pre>
+<pre><code>## Error in library(vegan): there is no package called &#39;vegan&#39;</code></pre>
+<pre class="r"><code>dists &lt;- vegdist(sqrt(veteran[,-c(2,3,7)]), method = &quot;bray&quot;)</code></pre>
+<pre><code>## Error in vegdist(sqrt(veteran[, -c(2, 3, 7)]), method = &quot;bray&quot;): could not find function &quot;vegdist&quot;</code></pre>
+<pre class="r"><code>distSq &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;squamous&quot;, -c(2,3,7)]), method = &quot;bray&quot;)</code></pre>
+<pre><code>## Error in vegdist(sqrt(veteran[veteran$celltype == &quot;squamous&quot;, -c(2, 3, : could not find function &quot;vegdist&quot;</code></pre>
+<pre class="r"><code>distSm &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;smallcell&quot;, -c(2,3,7)]), method = &quot;bray&quot;)</code></pre>
+<pre><code>## Error in vegdist(sqrt(veteran[veteran$celltype == &quot;smallcell&quot;, -c(2, 3, : could not find function &quot;vegdist&quot;</code></pre>
+<pre class="r"><code>distAd &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;adeno&quot;, -c(2,3,7)]), method = &quot;bray&quot;)</code></pre>
+<pre><code>## Error in vegdist(sqrt(veteran[veteran$celltype == &quot;adeno&quot;, -c(2, 3, 7)]), : could not find function &quot;vegdist&quot;</code></pre>
+<pre class="r"><code>distLa &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;large&quot;, -c(2,3,7)]), method = &quot;bray&quot;)</code></pre>
+<pre><code>## Error in vegdist(sqrt(veteran[veteran$celltype == &quot;large&quot;, -c(2, 3, 7)]), : could not find function &quot;vegdist&quot;</code></pre>
+<pre class="r"><code>SSR &lt;- sum(distSq^2)/35 + sum(distSm^2)/48 + sum(distAd^2)/27 + sum(distLa^2)/27</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;distSq&#39; not found</code></pre>
+<pre class="r"><code>SST &lt;- sum(dists^2)/137</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;dists&#39; not found</code></pre>
+<pre class="r"><code>Fstat &lt;- (SST - SSR)/(SSR/134)</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;SST&#39; not found</code></pre>
+<pre class="r"><code>Fstat</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;Fstat&#39; not found</code></pre>
+<pre class="r"><code>perm.sampdist&lt;-replicate(5000,{
+new&lt;-veteran
+new$celltype&lt;-sample(veteran$celltype)
+dists&lt;-vegdist(sqrt(new[,-c(2,3,7)]),method=&quot;bray&quot;)
+distSq&lt;-vegdist(sqrt(new[new$celltype==&quot;squamous&quot;,-c(2,3,7)]),method=&quot;bray&quot;)
+distSm&lt;-vegdist(sqrt(new[new$celltype==&quot;smallcell&quot;,-c(2,3,7)]),method=&quot;bray&quot;)
+distAd&lt;-vegdist(sqrt(new[new$celltype==&quot;adeno&quot;,-c(2,3,7)]),method=&quot;bray&quot;)
+distLa&lt;-vegdist(sqrt(new[new$celltype==&quot;large&quot;,-c(2,3,7)]),method=&quot;bray&quot;)
+SSR &lt;- sum(distSq^2)/35 + sum(distSm^2)/48 + sum(distAd^2)/27 + sum(distLa^2)/27
+SST &lt;- sum(dists^2)/137
+(SST-SSR)/(SSR/134)
+} )</code></pre>
+<pre><code>## Error in vegdist(sqrt(new[, -c(2, 3, 7)]), method = &quot;bray&quot;): could not find function &quot;vegdist&quot;</code></pre>
+<pre class="r"><code>mean(perm.sampdist&gt;Fstat)</code></pre>
+<pre><code>## Error in mean(perm.sampdist &gt; Fstat): object &#39;perm.sampdist&#39; not found</code></pre>
+<pre class="r"><code>{hist(perm.sampdist,prob = T); abline(v=Fstat, col=&quot;red&quot;, add=T)}</code></pre>
+<pre><code>## Error in hist(perm.sampdist, prob = T): object &#39;perm.sampdist&#39; not found</code></pre>
+<p><em>The randomization test that was performed on the data was a PERMANOVA test. The null hypothesis is: For age and time, the means of each cell type are equal. The alternative hypothesis is: For at least one of the dependent variables, at least one cell type mean is different. After the test was performed, it was determined that the actual F statistic is far away from the majority of the F statistics that arise in the simulation distribution where there is no difference between groups, indicating that there is enough evidence to say that age and time differ between those groups. The results demonstrated that 7.3% of the simulated sampling distribution is greater than our observed F-stat. Since this distribution was created under the null hypothesis of no mean difference between groups, there is a 7% chance of seeing an F-stat this large under the null, so we cannot reject this hypothesis as inconsistent with our data.</em></p>
+</div>
+<div id="linear-regression-model" class="section level3">
+<h3>3 - Linear regression model:</h3>
+<pre class="r"><code>library(sandwich)
+library(lmtest)</code></pre>
+<pre><code>## Error in library(lmtest): there is no package called &#39;lmtest&#39;</code></pre>
+<pre class="r"><code>veteran &lt;- veteran %&gt;% mutate(&quot;karno_c&quot; = scale(veteran$karno, center = TRUE, scale = FALSE)) %&gt;% mutate(&quot;time_c&quot; = scale(veteran$time, center = TRUE, scale = FALSE)) %&gt;% mutate(&quot;age_c&quot; = scale(veteran$time, center = TRUE, scale = FALSE)) %&gt;% mutate(&quot;diagtime_c&quot; = scale(veteran$diagtime, center = TRUE, scale = FALSE))</code></pre>
+<pre><code>## Error in veteran %&gt;% mutate(karno_c = scale(veteran$karno, center = TRUE, : could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="r"><code>fit&lt;-lm(time ~ celltype * diagtime_c, data=veteran)</code></pre>
+<pre><code>## Error in eval(predvars, data, env): object &#39;diagtime_c&#39; not found</code></pre>
+<pre class="r"><code>coeftest(fit)</code></pre>
+<pre><code>## Error in coeftest(fit): could not find function &quot;coeftest&quot;</code></pre>
+<pre class="r"><code>newdat&lt;-veteran
+newdat$celltype&lt;-rep(&quot;squamous&quot;,length(newdat$celltype))
+newdat$pred1&lt;-predict(fit,newdat)</code></pre>
+<pre><code>## Error in predict(fit, newdat): object &#39;fit&#39; not found</code></pre>
+<pre class="r"><code>newdat$celltype&lt;-rep(&quot;smallcell&quot;,length(newdat$celltype))
+newdat$pred2&lt;-predict(fit,newdat)</code></pre>
+<pre><code>## Error in predict(fit, newdat): object &#39;fit&#39; not found</code></pre>
+<pre class="r"><code>newdat$celltype&lt;-rep(&quot;adeno&quot;,length(newdat$celltype))
+newdat$pred3&lt;-predict(fit,newdat)</code></pre>
+<pre><code>## Error in predict(fit, newdat): object &#39;fit&#39; not found</code></pre>
+<pre class="r"><code>newdat$celltype&lt;-rep(&quot;large&quot;,length(newdat$celltype))
+newdat$pred4&lt;-predict(fit,newdat)</code></pre>
+<pre><code>## Error in predict(fit, newdat): object &#39;fit&#39; not found</code></pre>
+<pre class="r"><code>ggplot(veteran, aes(x = diagtime_c, y = time)) + geom_point() + geom_line(data = newdat, aes(y = pred1),color=&#39;blue&#39; ) + geom_line(data = newdat, aes(y = pred2),color=&#39;red&#39; ) + geom_line(data = newdat, aes(y = pred3),color=&#39;purple&#39; ) + geom_line(data = newdat, aes(y = pred4),color=&#39;orange&#39; )</code></pre>
+<pre><code>## Error in ggplot(veteran, aes(x = diagtime_c, y = time)): could not find function &quot;ggplot&quot;</code></pre>
+<pre class="r"><code>resids&lt;-fit$residuals</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;fit&#39; not found</code></pre>
+<pre class="r"><code>fitvals&lt;-fit$fitted.values </code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;fit&#39; not found</code></pre>
+<pre class="r"><code>ggplot()+geom_point(aes(fitvals,resids))+geom_hline(yintercept=0, color=&#39;red&#39;)</code></pre>
+<pre><code>## Error in ggplot(): could not find function &quot;ggplot&quot;</code></pre>
+<pre class="r"><code>bptest(fit)</code></pre>
+<pre><code>## Error in bptest(fit): could not find function &quot;bptest&quot;</code></pre>
+<pre class="r"><code>ggplot()+geom_histogram(aes(resids), bins=20)</code></pre>
+<pre><code>## Error in ggplot(): could not find function &quot;ggplot&quot;</code></pre>
+<pre class="r"><code>shapiro.test(resids)</code></pre>
+<pre><code>## Error in stopifnot(is.numeric(x)): object &#39;resids&#39; not found</code></pre>
+<pre class="r"><code>summary(fit)$coef[,1:2]</code></pre>
+<pre><code>## Error in summary(fit): object &#39;fit&#39; not found</code></pre>
+<pre class="r"><code>coeftest(fit, vcov = vcovHC(fit))[,1:2]</code></pre>
+<pre><code>## Error in coeftest(fit, vcov = vcovHC(fit)): could not find function &quot;coeftest&quot;</code></pre>
+<pre class="r"><code>(sum((veteran$time-mean(veteran$time))^2)-sum(fit$residuals^2))/sum((veteran$time-mean(veteran$time))^2)   </code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;fit&#39; not found</code></pre>
+<p><em>A linear regression model was performed to predict the survival time (time) from cell type (celltype) and diagnosis time (diagtime), including their interaction. For the interaction, there was only one numeric variable (diagnosis time) which was mean centered for better accuracy. The full model with the interaction is time = 210.64 - 139.11 (celltypesmallcell) - 150.39(celltypeadeno) - 45.26(celltypelarge) - 4.63(diagtime_c) + 4.92(celltypesmallcell x diagtime_c) + 3.40(celltypeadeno x diagtime_c) + 3.47(celltypelarge x diagtime_c). Controlling for diagtime_c, when celltypesmallcell is 1 and the other cell type levels are 0, time decreases by a factor of 139.11. Controlling for diagtime_c, when celltypeadeno is 1 and the other cell type levels are 0, time decreases by a factor of 150.39. Controlling for diagtime_c, when celltypelarge is 1 and the other cell type levels are 0, time decreases by a factor of 45.26. For every 1-unit increase in diagtime_c, time decreases by a factor of 4.63, on average. For the interaction where the small cell is 1, and the other cell types are 0, resulting equation is 210.64 -139.11 - 4.63(diagtime_c) + 4.92(1xdiagtime_c) = 71.53 + 0.29(diagtime_c). For the interaction where the adeno cell is 1, and the other cell types are 0, resulting equation is 210.64 - 150.39 - 4.63(diagtime_c) + 3.40(1xdiagtime_c) = 60.25 - 1.23(diagtime_c). For the interaction where the large cell is 1, and the other cell types are 0, resulting equation is 210.64 - 45.26 + 4.63(diagtime_c) + 3.47(1xdiagtime_c) = 165.38 + 8.10(diagtime_c). The estimate for the interaction term is the difference in the slopes. The significance of the results is to run robust standard errors to determine whether the heteroskedastic plot has proper standard errors (SEs) to justify the assumption of skedasticity of the graph. The results show that the graph is in fact, heteroskedastic because of the changes in robust SEs before and afer recomputing the regression. The changes in SEs from uncorrected to corrected increase for all of the predictors except for diagtime_c and all of the interactions between cell type and diagtime_c (celltypesmallcell:diagtime_c, celltypeadeno:diagtime_c, and celltypelarge:diagtime_c), meaning that the homoskedasticity assumption was violated. A proportion of 0.17 was calculated to explain the variation in the response variable of time explained by the overall model.</em></p>
+</div>
+<div id="linear-regression-model-cont." class="section level3">
+<h3>4 - Linear regression model (cont.):</h3>
+<pre class="r"><code>bptest(fit)</code></pre>
+<pre><code>## Error in bptest(fit): could not find function &quot;bptest&quot;</code></pre>
+<pre class="r"><code>x=seq(-5,5,length.out=1000)
+y=1+2*x+rnorm(1000)
+dat&lt;-data.frame(x,y)
+
+boot_dat&lt;-dat[sample(nrow(dat),replace=TRUE),]
+samp_distn&lt;-replicate(5000, {
+ boot_dat&lt;-veteran[sample(nrow(veteran),replace=TRUE),]
+ fit&lt;-lm(time~celltype*diagtime_c,data=boot_dat)
+ coef(fit)
+})</code></pre>
+<pre><code>## Error in eval(predvars, data, env): object &#39;diagtime_c&#39; not found</code></pre>
+<pre class="r"><code>samp_distn%&gt;%t%&gt;%as.data.frame%&gt;%summarize_all(sd)</code></pre>
+<pre><code>## Error in samp_distn %&gt;% t %&gt;% as.data.frame %&gt;% summarize_all(sd): could not find function &quot;%&gt;%&quot;</code></pre>
+<p><em>The same regression model (with the interaction), but with bootstrappped standard errors was then performed to observe and compare the SEs and p-values to the original and robust SEs. The original SEs are very different from the bootstrapped SEs for the cell type levels but are similar for diagtime_c and the interactions (celltypesmallcell:diagtime_c, celltypeadeno:diagtime_c, and celltypelarge:diagtime_c). However, the bootstrapped SEs are almost the same as the robust SEs, only differing from decimals to one point. The p-value for the interaction model was 0.09391.</em></p>
+</div>
+<div id="logistic-regression-model" class="section level3">
+<h3>5 - Logistic regression model:</h3>
+<pre class="r"><code>veteran &lt;- veteran %&gt;% transmute( trt, celltype, time, status, karno, diagtime, age, prior, y=as.numeric(ifelse(prior == &quot;10&quot;,1,0)))</code></pre>
+<pre><code>## Error in veteran %&gt;% transmute(trt, celltype, time, status, karno, diagtime, : could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="r"><code>fit1&lt;-glm(y ~  celltype + diagtime , data=veteran,family=&quot;binomial&quot;)</code></pre>
+<pre><code>## Error in model.frame.default(formula = y ~ celltype + diagtime, data = veteran, : variable lengths differ (found for &#39;celltype&#39;)</code></pre>
+<pre class="r"><code>coeftest(fit1)</code></pre>
+<pre><code>## Error in coeftest(fit1): could not find function &quot;coeftest&quot;</code></pre>
+<pre class="r"><code>exp(coef(fit1))</code></pre>
+<pre><code>## Error in coef(fit1): object &#39;fit1&#39; not found</code></pre>
+<pre class="r"><code>prob&lt;-predict(fit1,type=&quot;response&quot;)</code></pre>
+<pre><code>## Error in predict(fit1, type = &quot;response&quot;): object &#39;fit1&#39; not found</code></pre>
+<pre class="r"><code>pred&lt;-ifelse(prob&gt;.5,1,0)</code></pre>
+<pre><code>## Error in ifelse(prob &gt; 0.5, 1, 0): object &#39;prob&#39; not found</code></pre>
+<pre class="r"><code>table(truth=veteran$y,prediction=pred)%&gt;%addmargins</code></pre>
+<pre><code>## Error in table(truth = veteran$y, prediction = pred) %&gt;% addmargins: could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="r"><code>(92+14)/137 #accuracy</code></pre>
+<pre><code>## [1] 0.7737226</code></pre>
+<pre class="r"><code>14/40 #tpr</code></pre>
+<pre><code>## [1] 0.35</code></pre>
+<pre class="r"><code>92/97 #tnr</code></pre>
+<pre><code>## [1] 0.9484536</code></pre>
+<pre class="r"><code>14/19 #ppv</code></pre>
+<pre><code>## [1] 0.7368421</code></pre>
+<pre class="r"><code>odds&lt;-function(p)p/(1-p)
+p&lt;-seq(0,1,by=.1)
+cbind(p, odds=odds(p))%&gt;%round(4)</code></pre>
+<pre><code>## Error in cbind(p, odds = odds(p)) %&gt;% round(4): could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="r"><code>logit&lt;-function(p)log(odds(p))
+cbind(p, odds=odds(p),logit=logit(p))%&gt;%round(4)</code></pre>
+<pre><code>## Error in cbind(p, odds = odds(p), logit = logit(p)) %&gt;% round(4): could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="r"><code>veteran$logit&lt;-predict(fit1)</code></pre>
+<pre><code>## Error in predict(fit1): object &#39;fit1&#39; not found</code></pre>
+<pre class="r"><code>veteran$y&lt;-factor(veteran$y,levels=c(&quot;1&quot;,&quot;0&quot;))</code></pre>
+<pre><code>## Error in `$&lt;-.data.frame`(`*tmp*`, y, value = structure(integer(0), .Label = c(&quot;1&quot;, : replacement has 0 rows, data has 137</code></pre>
+<pre class="r"><code>ggplot(veteran,aes(logit, fill=y))+geom_density(alpha=.3)+
+geom_vline(xintercept=0,lty=2)</code></pre>
+<pre><code>## Error in ggplot(veteran, aes(logit, fill = y)): could not find function &quot;ggplot&quot;</code></pre>
+<pre class="r"><code>library(plotROC) </code></pre>
+<pre><code>## Error in library(plotROC): there is no package called &#39;plotROC&#39;</code></pre>
+<pre class="r"><code>veteran &lt;- veteran %&gt;% transmute( trt, celltype, time, status, karno, diagtime, age, prior, y=as.numeric(ifelse(prior == &quot;10&quot;,1,0)))</code></pre>
+<pre><code>## Error in veteran %&gt;% transmute(trt, celltype, time, status, karno, diagtime, : could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="r"><code>ROCplot&lt;-ggplot(veteran)+geom_roc(aes(d=y,m=prob), n.cuts=0) </code></pre>
+<pre><code>## Error in ggplot(veteran): could not find function &quot;ggplot&quot;</code></pre>
+<pre class="r"><code>ROCplot</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;ROCplot&#39; not found</code></pre>
+<pre class="r"><code>calc_auc(ROCplot)</code></pre>
+<pre><code>## Error in calc_auc(ROCplot): could not find function &quot;calc_auc&quot;</code></pre>
+<pre class="r"><code>class_diag&lt;-function(probs,truth){
+ tab&lt;-table(factor(probs&gt;.5,levels=c(&quot;FALSE&quot;,&quot;TRUE&quot;)),truth)
+ acc=sum(diag(tab))/sum(tab)
+ sens=tab[2,2]/colSums(tab)[2]
+ spec=tab[1,1]/colSums(tab)[1]
+ ppv=tab[2,2]/rowSums(tab)[2]
+ if(is.numeric(truth)==FALSE &amp; is.logical(truth)==FALSE) truth&lt;-as.numeric(truth)-1
+ ord&lt;-order(probs, decreasing=TRUE)
+ probs &lt;- probs[ord]; truth &lt;- truth[ord]
+ TPR=cumsum(truth)/max(1,sum(truth))
+ FPR=cumsum(!truth)/max(1,sum(!truth))
+ dup&lt;-c(probs[-1]&gt;=probs[-length(probs)], FALSE)
+ TPR&lt;-c(0,TPR[!dup],1); FPR&lt;-c(0,FPR[!dup],1)
+ n &lt;- length(TPR)
+ auc&lt;- sum( ((TPR[-1]+TPR[-n])/2) * (FPR[-1]-FPR[-n]) )
+ data.frame(acc,sens,spec,ppv,auc)
+} 
+
+set.seed(1234)
+k=10 
+data1&lt;-veteran[sample(nrow(veteran)),]
+folds&lt;-cut(seq(1:nrow(veteran)),breaks=k,labels=F)
+diags&lt;-NULL
+for(i in 1:k){
+ train&lt;-data1[folds!=i,]
+ test&lt;-data1[folds==i,]
+ truth&lt;-test$y
+ fit&lt;-glm(y~celltype + diagtime,data=train,family=&quot;binomial&quot;)
+ probs&lt;-predict(fit,newdata = test,type=&quot;response&quot;)
+ diags&lt;-rbind(diags,class_diag(probs,truth))
+}</code></pre>
+<pre><code>## Error in model.frame.default(formula = y ~ celltype + diagtime, data = train, : variable lengths differ (found for &#39;celltype&#39;)</code></pre>
+<pre class="r"><code>apply(diags,2,mean)</code></pre>
+<pre><code>## Error in apply(diags, 2, mean): dim(X) must have a positive length</code></pre>
+<p><em>A logistic regression was performed on to predict the prior therapy variable (y) from the variables of cell type (celltype) and diagnosis time (diagtime). After running the coefficient test, the diagnosis time significantly increases the log-odds of prior therapy observed (y = 1). Controlling for diagnosis time (diagtime), none of the cell types, including squamous, are significantly different. Controlling for cell type (celltype), for every 1-unit increase in diagnosis time (diagtime), odds of prior therapy change by a factor of 1.149 (increasing by 114%). A confusion matrix for the logistic regression was performed to plot model predictions against true values. The proportion of correctly classified cases is the overall accuracy resulting in a value of 0.77. The sensitivity (TPR) values is 0.35, meaning that was the proportion of prior therapy (y = 1) correctly classified. The correctly classified proportion, or specificity (TNR) of no prior therapy (y = 0) is 0.95. The proportion classified as having prior therapy (y = 1) who actually are classified is 0.74. An ROC curve was generated to then calculate the AUC, which is the area under the curve. The purpose of calculating the AUC was to quantify how well the predictions are overall.The AUC that was calculated resulted in a value of 0.814. Because the AUC falls between .8-.9, the AUC value is considered good. The 10-fold CV was performed and the average out-of-sample accuracy is 0.75, average out-of-sample sensitivity is 0.37, and there was not an average out-of-sample recall (ppv = NaN). </em></p>
+</div>
+<div id="lasso-regression-model" class="section level3">
+<h3>6 - LASSO regression model:</h3>
+<pre class="r"><code>library(glmnet)</code></pre>
+<pre><code>## Error in library(glmnet): there is no package called &#39;glmnet&#39;</code></pre>
+<pre class="r"><code>fit2 &lt;- glm(y ~ -1 + status + karno + time + celltype + diagtime + age + trt, data = veteran, family = &quot;binomial&quot;)</code></pre>
+<pre><code>## Error in model.frame.default(formula = y ~ -1 + status + karno + time + : variable lengths differ (found for &#39;status&#39;)</code></pre>
+<pre class="r"><code>model.matrix(fit2) %&gt;% head()</code></pre>
+<pre><code>## Error in model.matrix(fit2) %&gt;% head(): could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="r"><code>set.seed(1234)
+x&lt;-model.matrix(fit2)</code></pre>
+<pre><code>## Error in model.matrix(fit2): object &#39;fit2&#39; not found</code></pre>
+<pre class="r"><code>x&lt;-scale(x)
+y&lt;-as.matrix(veteran$y)</code></pre>
+<pre><code>## Error in array(x, c(length(x), 1L), if (!is.null(names(x))) list(names(x), : &#39;data&#39; must be of a vector type, was &#39;NULL&#39;</code></pre>
+<pre class="r"><code>cv&lt;-cv.glmnet(x,y,family=&#39;binomial&#39;)</code></pre>
+<pre><code>## Error in cv.glmnet(x, y, family = &quot;binomial&quot;): could not find function &quot;cv.glmnet&quot;</code></pre>
+<pre class="r"><code>lasso&lt;-glmnet(x,y,family=&#39;binomial&#39;,lambda=cv$lambda.1se)</code></pre>
+<pre><code>## Error in glmnet(x, y, family = &quot;binomial&quot;, lambda = cv$lambda.1se): could not find function &quot;glmnet&quot;</code></pre>
+<pre class="r"><code>coef(cv)</code></pre>
+<pre><code>## Error in coef(cv): object &#39;cv&#39; not found</code></pre>
+<pre class="r"><code>set.seed(1234)
+k=10
+data1&lt;-veteran[sample(nrow(veteran)),]
+folds&lt;-cut(seq(1:nrow(veteran)),breaks=k,labels=F)
+diags&lt;-NULL
+for(i in 1:k){
+ train&lt;-data1[folds!=i,]
+ test&lt;-data1[folds==i,]
+ truth&lt;-test$y
+ fit3&lt;-glm(y~diagtime,data=train,family=&quot;binomial&quot;)
+ probs&lt;-predict(fit3,newdata = test,type=&quot;response&quot;)
+ diags&lt;-rbind(diags,class_diag(probs,truth))
+}</code></pre>
+<pre><code>## Error in model.frame.default(formula = y ~ diagtime, data = train, drop.unused.levels = TRUE): variable lengths differ (found for &#39;diagtime&#39;)</code></pre>
+<pre class="r"><code>diags%&gt;%summarize_all(mean)</code></pre>
+<pre><code>## Error in diags %&gt;% summarize_all(mean): could not find function &quot;%&gt;%&quot;</code></pre>
+<p><em>After the LASSO regression was performed and choosing lambda to give the simplest model whose accuracy is near that of the best, the variable retained was the diagnosis time (diagtime). This is the most important predictors of y.Once the 10-fold CV model was performed, the model’s out-of-sample accuracy is the same as that of the logistic regression in part 5, both with a value of 0.75. </em></p>
+</div>
+</div>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      </div>
+      
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/docs.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>
