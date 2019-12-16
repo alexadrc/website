@@ -9,7 +9,7 @@ description: ''
 ---
 
 <center>
-![](https://s2.thingpic.com/images/jf/W6UpG95kEJbvxhtvcawj3GU6.jpeg){width=50%}
+![](https://s2.thingpic.com/images/jf/W6UpG95kEJbvxhtvcawj3GU6.jpeg){width=70%}
 </center>
 
 
@@ -35,7 +35,7 @@ print('The maximum value on waiting is',faithful.waiting.max())
 ```
 
 <center>
-![](https://media.tacdn.com/media/attractions-splice-spp-674x446/07/26/3c/87.jpg){width=50%}
+![](https://media.tacdn.com/media/attractions-splice-spp-674x446/07/26/3c/87.jpg){width=70%}
 </center>
 
 
