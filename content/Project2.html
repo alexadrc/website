@@ -1,7 +1,7 @@
 ---
 title: "Project 2"
 author: "SDS348 Fall 2019"
-date: "10/20/2019"
+date: "2019-12-16"
 output:
   html_document: default
   pdf_document: default
@@ -19,9 +19,6 @@ library(&quot;tidyverse&quot;)</code></pre>
 ## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
 ## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ## ✓ purrr   0.3.3</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.4.4</code></pre>
-<pre><code>## Warning: package &#39;stringr&#39; was built under R version 3.4.4</code></pre>
-<pre><code>## Warning: package &#39;forcats&#39; was built under R version 3.4.4</code></pre>
 <pre><code>## ── Conflicts ───────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
@@ -72,25 +69,19 @@ summary(man1)</code></pre>
 <div id="randomization-test" class="section level3">
 <h3>2 - Randomization test:</h3>
 <pre class="r"><code>library(vegan)</code></pre>
-<pre><code>## Error in library(vegan): there is no package called &#39;vegan&#39;</code></pre>
-<pre class="r"><code>dists &lt;- vegdist(sqrt(veteran[,-c(2,3,7)]), method = &quot;bray&quot;)</code></pre>
-<pre><code>## Error in vegdist(sqrt(veteran[, -c(2, 3, 7)]), method = &quot;bray&quot;): could not find function &quot;vegdist&quot;</code></pre>
-<pre class="r"><code>distSq &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;squamous&quot;, -c(2,3,7)]), method = &quot;bray&quot;)</code></pre>
-<pre><code>## Error in vegdist(sqrt(veteran[veteran$celltype == &quot;squamous&quot;, -c(2, 3, : could not find function &quot;vegdist&quot;</code></pre>
-<pre class="r"><code>distSm &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;smallcell&quot;, -c(2,3,7)]), method = &quot;bray&quot;)</code></pre>
-<pre><code>## Error in vegdist(sqrt(veteran[veteran$celltype == &quot;smallcell&quot;, -c(2, 3, : could not find function &quot;vegdist&quot;</code></pre>
-<pre class="r"><code>distAd &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;adeno&quot;, -c(2,3,7)]), method = &quot;bray&quot;)</code></pre>
-<pre><code>## Error in vegdist(sqrt(veteran[veteran$celltype == &quot;adeno&quot;, -c(2, 3, 7)]), : could not find function &quot;vegdist&quot;</code></pre>
-<pre class="r"><code>distLa &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;large&quot;, -c(2,3,7)]), method = &quot;bray&quot;)</code></pre>
-<pre><code>## Error in vegdist(sqrt(veteran[veteran$celltype == &quot;large&quot;, -c(2, 3, 7)]), : could not find function &quot;vegdist&quot;</code></pre>
-<pre class="r"><code>SSR &lt;- sum(distSq^2)/35 + sum(distSm^2)/48 + sum(distAd^2)/27 + sum(distLa^2)/27</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;distSq&#39; not found</code></pre>
-<pre class="r"><code>SST &lt;- sum(dists^2)/137</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;dists&#39; not found</code></pre>
-<pre class="r"><code>Fstat &lt;- (SST - SSR)/(SSR/134)</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;SST&#39; not found</code></pre>
-<pre class="r"><code>Fstat</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;Fstat&#39; not found</code></pre>
+<pre><code>## Loading required package: permute</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## This is vegan 2.5-6</code></pre>
+<pre class="r"><code>dists &lt;- vegdist(sqrt(veteran[,-c(2,3,7)]), method = &quot;bray&quot;)
+distSq &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;squamous&quot;, -c(2,3,7)]), method = &quot;bray&quot;)
+distSm &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;smallcell&quot;, -c(2,3,7)]), method = &quot;bray&quot;)
+distAd &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;adeno&quot;, -c(2,3,7)]), method = &quot;bray&quot;)
+distLa &lt;- vegdist(sqrt(veteran[veteran$celltype == &quot;large&quot;, -c(2,3,7)]), method = &quot;bray&quot;)
+SSR &lt;- sum(distSq^2)/35 + sum(distSm^2)/48 + sum(distAd^2)/27 + sum(distLa^2)/27
+SST &lt;- sum(dists^2)/137
+Fstat &lt;- (SST - SSR)/(SSR/134)
+Fstat</code></pre>
+<pre><code>## [1] 6.788443</code></pre>
 <pre class="r"><code>perm.sampdist&lt;-replicate(5000,{
 new&lt;-veteran
 new$celltype&lt;-sample(veteran$celltype)
@@ -102,24 +93,44 @@ distLa&lt;-vegdist(sqrt(new[new$celltype==&quot;large&quot;,-c(2,3,7)]),method=&
 SSR &lt;- sum(distSq^2)/35 + sum(distSm^2)/48 + sum(distAd^2)/27 + sum(distLa^2)/27
 SST &lt;- sum(dists^2)/137
 (SST-SSR)/(SSR/134)
-} )</code></pre>
-<pre><code>## Error in vegdist(sqrt(new[, -c(2, 3, 7)]), method = &quot;bray&quot;): could not find function &quot;vegdist&quot;</code></pre>
-<pre class="r"><code>mean(perm.sampdist&gt;Fstat)</code></pre>
-<pre><code>## Error in mean(perm.sampdist &gt; Fstat): object &#39;perm.sampdist&#39; not found</code></pre>
+} )
+
+mean(perm.sampdist&gt;Fstat)</code></pre>
+<pre><code>## [1] 0.0376</code></pre>
 <pre class="r"><code>{hist(perm.sampdist,prob = T); abline(v=Fstat, col=&quot;red&quot;, add=T)}</code></pre>
-<pre><code>## Error in hist(perm.sampdist, prob = T): object &#39;perm.sampdist&#39; not found</code></pre>
+<pre><code>## Warning in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): &quot;add&quot; is
+## not a graphical parameter</code></pre>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p><em>The randomization test that was performed on the data was a PERMANOVA test. The null hypothesis is: For age and time, the means of each cell type are equal. The alternative hypothesis is: For at least one of the dependent variables, at least one cell type mean is different. After the test was performed, it was determined that the actual F statistic is far away from the majority of the F statistics that arise in the simulation distribution where there is no difference between groups, indicating that there is enough evidence to say that age and time differ between those groups. The results demonstrated that 7.3% of the simulated sampling distribution is greater than our observed F-stat. Since this distribution was created under the null hypothesis of no mean difference between groups, there is a 7% chance of seeing an F-stat this large under the null, so we cannot reject this hypothesis as inconsistent with our data.</em></p>
 </div>
 <div id="linear-regression-model" class="section level3">
 <h3>3 - Linear regression model:</h3>
 <pre class="r"><code>library(sandwich)
 library(lmtest)</code></pre>
-<pre><code>## Error in library(lmtest): there is no package called &#39;lmtest&#39;</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
+<pre><code>## 
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     as.Date, as.Date.numeric</code></pre>
 <pre class="r"><code>veteran &lt;- veteran %&gt;% mutate(&quot;karno_c&quot; = scale(veteran$karno, center = TRUE, scale = FALSE)) %&gt;% mutate(&quot;time_c&quot; = scale(veteran$time, center = TRUE, scale = FALSE)) %&gt;% mutate(&quot;age_c&quot; = scale(veteran$time, center = TRUE, scale = FALSE)) %&gt;% mutate(&quot;diagtime_c&quot; = scale(veteran$diagtime, center = TRUE, scale = FALSE))
 
 fit&lt;-lm(time ~ celltype * diagtime_c, data=veteran)
 coeftest(fit)</code></pre>
-<pre><code>## Error in coeftest(fit): could not find function &quot;coeftest&quot;</code></pre>
+<pre><code>## 
+## t test of coefficients:
+## 
+##                               Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)                   210.6406    25.4301  8.2831 1.327e-13 ***
+## celltypesmallcell            -139.1122    33.1800 -4.1927 5.084e-05 ***
+## celltypeadeno                -150.3905    42.6369 -3.5272 0.0005823 ***
+## celltypelarge                 -45.2576    38.2935 -1.1819 0.2394352    
+## diagtime_c                     -4.6303     2.1952 -2.1093 0.0368530 *  
+## celltypesmallcell:diagtime_c    4.9206     2.6859  1.8321 0.0692493 .  
+## celltypeadeno:diagtime_c        3.4023     6.4583  0.5268 0.5992315    
+## celltypelarge:diagtime_c        3.4665     6.2012  0.5590 0.5771291    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>newdat&lt;-veteran
 newdat$celltype&lt;-rep(&quot;squamous&quot;,length(newdat$celltype))
 newdat$pred1&lt;-predict(fit,newdat)
@@ -131,15 +142,19 @@ newdat$celltype&lt;-rep(&quot;large&quot;,length(newdat$celltype))
 newdat$pred4&lt;-predict(fit,newdat)
 
 ggplot(veteran, aes(x = diagtime_c, y = time)) + geom_point() + geom_line(data = newdat, aes(y = pred1),color=&#39;blue&#39; ) + geom_line(data = newdat, aes(y = pred2),color=&#39;red&#39; ) + geom_line(data = newdat, aes(y = pred3),color=&#39;purple&#39; ) + geom_line(data = newdat, aes(y = pred4),color=&#39;orange&#39; )</code></pre>
-<p><img src="/Project2_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <pre class="r"><code>resids&lt;-fit$residuals
 fitvals&lt;-fit$fitted.values 
 ggplot()+geom_point(aes(fitvals,resids))+geom_hline(yintercept=0, color=&#39;red&#39;)</code></pre>
-<p><img src="/Project2_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
 <pre class="r"><code>bptest(fit)</code></pre>
-<pre><code>## Error in bptest(fit): could not find function &quot;bptest&quot;</code></pre>
+<pre><code>## 
+##  studentized Breusch-Pagan test
+## 
+## data:  fit
+## BP = 12.209, df = 7, p-value = 0.09391</code></pre>
 <pre class="r"><code>ggplot()+geom_histogram(aes(resids), bins=20)</code></pre>
-<p><img src="/Project2_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
 <pre class="r"><code>shapiro.test(resids)</code></pre>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
@@ -157,7 +172,15 @@ ggplot()+geom_point(aes(fitvals,resids))+geom_hline(yintercept=0, color=&#39;red
 ## celltypeadeno:diagtime_c        3.402293   6.458314
 ## celltypelarge:diagtime_c        3.466514   6.201249</code></pre>
 <pre class="r"><code>coeftest(fit, vcov = vcovHC(fit))[,1:2]</code></pre>
-<pre><code>## Error in coeftest(fit, vcov = vcovHC(fit)): could not find function &quot;coeftest&quot;</code></pre>
+<pre><code>##                                 Estimate Std. Error
+## (Intercept)                   210.640630  43.522600
+## celltypesmallcell            -139.112242  45.352812
+## celltypeadeno                -150.390492  46.094332
+## celltypelarge                 -45.257554  49.576922
+## diagtime_c                     -4.630301   1.612375
+## celltypesmallcell:diagtime_c    4.920635   2.069727
+## celltypeadeno:diagtime_c        3.402293   3.429126
+## celltypelarge:diagtime_c        3.466514   5.495458</code></pre>
 <pre class="r"><code>(sum((veteran$time-mean(veteran$time))^2)-sum(fit$residuals^2))/sum((veteran$time-mean(veteran$time))^2)   </code></pre>
 <pre><code>## [1] 0.1706571</code></pre>
 <p><em>A linear regression model was performed to predict the survival time (time) from cell type (celltype) and diagnosis time (diagtime), including their interaction. For the interaction, there was only one numeric variable (diagnosis time) which was mean centered for better accuracy. The full model with the interaction is time = 210.64 - 139.11 (celltypesmallcell) - 150.39(celltypeadeno) - 45.26(celltypelarge) - 4.63(diagtime_c) + 4.92(celltypesmallcell x diagtime_c) + 3.40(celltypeadeno x diagtime_c) + 3.47(celltypelarge x diagtime_c). Controlling for diagtime_c, when celltypesmallcell is 1 and the other cell type levels are 0, time decreases by a factor of 139.11. Controlling for diagtime_c, when celltypeadeno is 1 and the other cell type levels are 0, time decreases by a factor of 150.39. Controlling for diagtime_c, when celltypelarge is 1 and the other cell type levels are 0, time decreases by a factor of 45.26. For every 1-unit increase in diagtime_c, time decreases by a factor of 4.63, on average. For the interaction where the small cell is 1, and the other cell types are 0, resulting equation is 210.64 -139.11 - 4.63(diagtime_c) + 4.92(1xdiagtime_c) = 71.53 + 0.29(diagtime_c). For the interaction where the adeno cell is 1, and the other cell types are 0, resulting equation is 210.64 - 150.39 - 4.63(diagtime_c) + 3.40(1xdiagtime_c) = 60.25 - 1.23(diagtime_c). For the interaction where the large cell is 1, and the other cell types are 0, resulting equation is 210.64 - 45.26 + 4.63(diagtime_c) + 3.47(1xdiagtime_c) = 165.38 + 8.10(diagtime_c). The estimate for the interaction term is the difference in the slopes. The significance of the results is to run robust standard errors to determine whether the heteroskedastic plot has proper standard errors (SEs) to justify the assumption of skedasticity of the graph. The results show that the graph is in fact, heteroskedastic because of the changes in robust SEs before and afer recomputing the regression. The changes in SEs from uncorrected to corrected increase for all of the predictors except for diagtime_c and all of the interactions between cell type and diagtime_c (celltypesmallcell:diagtime_c, celltypeadeno:diagtime_c, and celltypelarge:diagtime_c), meaning that the homoskedasticity assumption was violated. A proportion of 0.17 was calculated to explain the variation in the response variable of time explained by the overall model.</em></p>
@@ -165,7 +188,11 @@ ggplot()+geom_point(aes(fitvals,resids))+geom_hline(yintercept=0, color=&#39;red
 <div id="linear-regression-model-cont." class="section level3">
 <h3>4 - Linear regression model (cont.):</h3>
 <pre class="r"><code>bptest(fit)</code></pre>
-<pre><code>## Error in bptest(fit): could not find function &quot;bptest&quot;</code></pre>
+<pre><code>## 
+##  studentized Breusch-Pagan test
+## 
+## data:  fit
+## BP = 12.209, df = 7, p-value = 0.09391</code></pre>
 <pre class="r"><code>x=seq(-5,5,length.out=1000)
 y=1+2*x+rnorm(1000)
 dat&lt;-data.frame(x,y)
@@ -178,11 +205,11 @@ samp_distn&lt;-replicate(5000, {
 })
 samp_distn%&gt;%t%&gt;%as.data.frame%&gt;%summarize_all(sd)</code></pre>
 <pre><code>##   (Intercept) celltypesmallcell celltypeadeno celltypelarge diagtime_c
-## 1    43.05812          44.78334      45.06705      47.98534   2.481259
+## 1    43.81563          45.59197      45.86374      49.37229   2.393429
 ##   celltypesmallcell:diagtime_c celltypeadeno:diagtime_c
-## 1                     2.834567                  3.65515
+## 1                     2.796472                 3.512894
 ##   celltypelarge:diagtime_c
-## 1                 5.667427</code></pre>
+## 1                 5.495349</code></pre>
 <p><em>The same regression model (with the interaction), but with bootstrappped standard errors was then performed to observe and compare the SEs and p-values to the original and robust SEs. The original SEs are very different from the bootstrapped SEs for the cell type levels but are similar for diagtime_c and the interactions (celltypesmallcell:diagtime_c, celltypeadeno:diagtime_c, and celltypelarge:diagtime_c). However, the bootstrapped SEs are almost the same as the robust SEs, only differing from decimals to one point. The p-value for the interaction model was 0.09391.</em></p>
 </div>
 <div id="logistic-regression-model" class="section level3">
@@ -190,7 +217,17 @@ samp_distn%&gt;%t%&gt;%as.data.frame%&gt;%summarize_all(sd)</code></pre>
 <pre class="r"><code>veteran &lt;- veteran %&gt;% transmute( trt, celltype, time, status, karno, diagtime, age, prior, y=as.numeric(ifelse(prior == &quot;10&quot;,1,0)))
 fit1&lt;-glm(y ~  celltype + diagtime , data=veteran,family=&quot;binomial&quot;)
 coeftest(fit1)</code></pre>
-<pre><code>## Error in coeftest(fit1): could not find function &quot;coeftest&quot;</code></pre>
+<pre><code>## 
+## z test of coefficients:
+## 
+##                    Estimate Std. Error z value  Pr(&gt;|z|)    
+## (Intercept)       -1.821480   0.498894 -3.6510 0.0002612 ***
+## celltypesmallcell -0.773749   0.569471 -1.3587 0.1742368    
+## celltypeadeno     -0.559333   0.660995 -0.8462 0.3974421    
+## celltypelarge      0.098320   0.576221  0.1706 0.8645157    
+## diagtime           0.139756   0.033946  4.1170 3.838e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>exp(coef(fit1))</code></pre>
 <pre><code>##       (Intercept) celltypesmallcell     celltypeadeno     celltypelarge 
 ##         0.1617861         0.4612807         0.5715903         1.1033156 
@@ -245,13 +282,12 @@ cbind(p, odds=odds(p),logit=logit(p))%&gt;%round(4)</code></pre>
 veteran$y&lt;-factor(veteran$y,levels=c(&quot;1&quot;,&quot;0&quot;))
 ggplot(veteran,aes(logit, fill=y))+geom_density(alpha=.3)+
 geom_vline(xintercept=0,lty=2)</code></pre>
-<p><img src="/Project2_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<pre class="r"><code>library(plotROC) </code></pre>
-<pre><code>## Warning: package &#39;plotROC&#39; was built under R version 3.4.4</code></pre>
-<pre class="r"><code>veteran &lt;- veteran %&gt;% transmute( trt, celltype, time, status, karno, diagtime, age, prior, y=as.numeric(ifelse(prior == &quot;10&quot;,1,0)))
+<p><img src="/Project2_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>library(plotROC) 
+veteran &lt;- veteran %&gt;% transmute( trt, celltype, time, status, karno, diagtime, age, prior, y=as.numeric(ifelse(prior == &quot;10&quot;,1,0)))
 ROCplot&lt;-ggplot(veteran)+geom_roc(aes(d=y,m=prob), n.cuts=0) 
 ROCplot</code></pre>
-<p><img src="/Project2_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 <pre class="r"><code>calc_auc(ROCplot)</code></pre>
 <pre><code>##   PANEL group       AUC
 ## 1     1    -1 0.8136598</code></pre>
@@ -288,13 +324,19 @@ for(i in 1:k){
 }
 apply(diags,2,mean)</code></pre>
 <pre><code>##       acc      sens      spec       ppv       auc 
-## 0.7587912 0.3366667 0.9182828       NaN 0.7833081</code></pre>
+## 0.7445055 0.3242857 0.9125253       NaN 0.7890876</code></pre>
 <p><em>A logistic regression was performed on to predict the prior therapy variable (y) from the variables of cell type (celltype) and diagnosis time (diagtime). After running the coefficient test, the diagnosis time significantly increases the log-odds of prior therapy observed (y = 1). Controlling for diagnosis time (diagtime), none of the cell types, including squamous, are significantly different. Controlling for cell type (celltype), for every 1-unit increase in diagnosis time (diagtime), odds of prior therapy change by a factor of 1.149 (increasing by 114%). A confusion matrix for the logistic regression was performed to plot model predictions against true values. The proportion of correctly classified cases is the overall accuracy resulting in a value of 0.77. The sensitivity (TPR) values is 0.35, meaning that was the proportion of prior therapy (y = 1) correctly classified. The correctly classified proportion, or specificity (TNR) of no prior therapy (y = 0) is 0.95. The proportion classified as having prior therapy (y = 1) who actually are classified is 0.74. An ROC curve was generated to then calculate the AUC, which is the area under the curve. The purpose of calculating the AUC was to quantify how well the predictions are overall.The AUC that was calculated resulted in a value of 0.814. Because the AUC falls between .8-.9, the AUC value is considered good. The 10-fold CV was performed and the average out-of-sample accuracy is 0.75, average out-of-sample sensitivity is 0.37, and there was not an average out-of-sample recall (ppv = NaN). </em></p>
 </div>
 <div id="lasso-regression-model" class="section level3">
 <h3>6 - LASSO regression model:</h3>
 <pre class="r"><code>library(glmnet)</code></pre>
-<pre><code>## Error in library(glmnet): there is no package called &#39;glmnet&#39;</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Matrix&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
+## 
+##     expand, pack, unpack</code></pre>
+<pre><code>## Loaded glmnet 3.0-2</code></pre>
 <pre class="r"><code>fit2 &lt;- glm(y ~ -1 + status + karno + time + celltype + diagtime + age + trt, data = veteran, family = &quot;binomial&quot;)
 model.matrix(fit2) %&gt;% head()</code></pre>
 <pre><code>##   status karno time celltypesquamous celltypesmallcell celltypeadeno
@@ -315,12 +357,22 @@ model.matrix(fit2) %&gt;% head()</code></pre>
 x&lt;-model.matrix(fit2)
 x&lt;-scale(x)
 y&lt;-as.matrix(veteran$y)
-cv&lt;-cv.glmnet(x,y,family=&#39;binomial&#39;)</code></pre>
-<pre><code>## Error in cv.glmnet(x, y, family = &quot;binomial&quot;): could not find function &quot;cv.glmnet&quot;</code></pre>
-<pre class="r"><code>lasso&lt;-glmnet(x,y,family=&#39;binomial&#39;,lambda=cv$lambda.1se)</code></pre>
-<pre><code>## Error in glmnet(x, y, family = &quot;binomial&quot;, lambda = cv$lambda.1se): could not find function &quot;glmnet&quot;</code></pre>
-<pre class="r"><code>coef(cv)</code></pre>
-<pre><code>## Error in coef(cv): object &#39;cv&#39; not found</code></pre>
+cv&lt;-cv.glmnet(x,y,family=&#39;binomial&#39;)
+lasso&lt;-glmnet(x,y,family=&#39;binomial&#39;,lambda=cv$lambda.1se)
+coef(cv)</code></pre>
+<pre><code>## 11 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                            1
+## (Intercept)       -0.8949332
+## status             .        
+## karno              .        
+## time               .        
+## celltypesquamous   .        
+## celltypesmallcell  .        
+## celltypeadeno      .        
+## celltypelarge      .        
+## diagtime           0.2629170
+## age                .        
+## trt                .</code></pre>
 <pre class="r"><code>set.seed(1234)
 k=10
 data1&lt;-veteran[sample(nrow(veteran)),]
@@ -335,8 +387,8 @@ for(i in 1:k){
  diags&lt;-rbind(diags,class_diag(probs,truth))
 }
 diags%&gt;%summarize_all(mean)</code></pre>
-<pre><code>##         acc sens      spec ppv       auc
-## 1 0.7521978 0.28 0.9384848 NaN 0.8291667</code></pre>
+<pre><code>##         acc      sens      spec ppv       auc
+## 1 0.7598901 0.2985714 0.9416162 NaN 0.8076621</code></pre>
 <p><em>After the LASSO regression was performed and choosing lambda to give the simplest model whose accuracy is near that of the best, the variable retained was the diagnosis time (diagtime). This is the most important predictors of y.Once the 10-fold CV model was performed, the model’s out-of-sample accuracy is the same as that of the logistic regression in part 5, both with a value of 0.75. </em></p>
 </div>
 </div>
