@@ -10,8 +10,8 @@ output:
 
 ## Alexa D. Reyna-Carrillo adr2872
 
-```{r, echo=FALSE}
-knitr::opts_chunk$set(error = TRUE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{R}

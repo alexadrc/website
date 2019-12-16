@@ -28,7 +28,7 @@ Project2.Rmd</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/project1/</guid>
-      <description>Alexa D. Reyna-Carrillo adr2872 library(&amp;quot;fivethirtyeight&amp;quot;) library(&amp;quot;ggplot2&amp;quot;) ## Error in library(&amp;quot;ggplot2&amp;quot;): there is no package called &amp;#39;ggplot2&amp;#39; data(state_info) data(bad_drivers) 0 - Introduction: For the exploratory data analysis project, I have chosen two datasets called “state_info” and “bad_drivers”. Both of these can be found in the “fivethirtyeight” package. The “state_info” dataset is a general overview of the 50 states and the District of Columbia that make up the United States. The dataset consists of the state name, abbreviation, division, and region, designated by the U.</description>
+      <description>Alexa D. Reyna-Carrillo adr2872 library(&amp;quot;fivethirtyeight&amp;quot;) library(&amp;quot;ggplot2&amp;quot;) data(state_info) data(bad_drivers) 0 - Introduction: For the exploratory data analysis project, I have chosen two datasets called “state_info” and “bad_drivers”. Both of these can be found in the “fivethirtyeight” package. The “state_info” dataset is a general overview of the 50 states and the District of Columbia that make up the United States. The dataset consists of the state name, abbreviation, division, and region, designated by the U.</description>
     </item>
     
     <item>
@@ -37,7 +37,7 @@ Project2.Rmd</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/project2/</guid>
-      <description>Alexa D. Reyna-Carrillo adr2872 library(&amp;quot;survival&amp;quot;) library(&amp;quot;ggplot2&amp;quot;) ## Error in library(&amp;quot;ggplot2&amp;quot;): there is no package called &amp;#39;ggplot2&amp;#39; library(&amp;quot;tidyverse&amp;quot;) ## Error in library(&amp;quot;tidyverse&amp;quot;): there is no package called &amp;#39;tidyverse&amp;#39; data(&amp;quot;veteran&amp;quot;) 0 - Introduction: The dataset I will be using is the veteran dataset found on the ‘survival’ package. This data focuses on a veterans’ administration lung cancer study. There was a randomized trial of two treatment regimens for lung cancer performed in veterans, and the standard survival analysis was collected to create the dataset.</description>
+      <description>Alexa D. Reyna-Carrillo adr2872 library(&amp;quot;survival&amp;quot;) library(&amp;quot;ggplot2&amp;quot;) library(&amp;quot;tidyverse&amp;quot;) ## ── Attaching packages ────────────────────────────────────────────────── tidyverse 1.3.0 ── ## ✓ tibble 2.1.3 ✓ dplyr 0.8.3 ## ✓ tidyr 1.0.0 ✓ stringr 1.4.0 ## ✓ readr 1.3.1 ✓ forcats 0.4.0 ## ✓ purrr 0.3.3 ## Warning: package &amp;#39;readr&amp;#39; was built under R version 3.4.4 ## Warning: package &amp;#39;stringr&amp;#39; was built under R version 3.4.4 ## Warning: package &amp;#39;forcats&amp;#39; was built under R version 3.</description>
     </item>
     
     <item>
